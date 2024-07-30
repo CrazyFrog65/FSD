@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Portfolio</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background-image: url('https://th.bing.com/th/id/OIP.IXNzh9MZ6I2-vSoXVTWCUgHaE7?w=2000&h=1333&rs=1&pid=ImgDetMain');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Style the header */
+header {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+/* Create two columns/boxes that float next to each other */
+nav {
+  float: top;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  height: auto;
+}
+
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+article {
+  float: left;
+  padding: 20px;
+  width: 33.33%;
+  background-color: rgba(255, 255, 255, 0.8);
+  height: 300px;
+}
+
+/* Clear floats after the columns */
+section::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the footer */
+footer {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+@media (max-width: 800px) {
+  article {
+    width: 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  article {
+    width: 100%;
+  }
+  body {
+    background-size: auto;
+    background-repeat: repeat;
+  }
+}
+
+/* Form Styles */
+form {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+form input, form select {
+  display: block;
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+form button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #555;
+}
+
+.error {
+  color: red;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h2>My Portfolio</h2>
+</header>
+
+<nav>
+  <h3>Menu</h3>
+  <ul>
+    <li><a href="#">Reading</a></li>
+    <li><a href="#">Gaming</a></li>
+    <li><a href="#">Swimming</a></li>
+    <li><a href="https://github.com/CrazyFrog65" target="_blank">GitHub</a></li>
+  </ul>
+</nav>
+
+<section>
+  <article>
+    <h1>Reading</h1>
+    <p>I enjoy reading a variety of genres, from science fiction to historical novels. Reading allows me to explore new worlds and expand my knowledge on diverse topics.</p>
+    <p>Some of my favorite authors include...</p>
+  </article>
+  <article>
+    <h1>Gaming</h1>
+    <p>Gaming is one of my favorite pastimes. I enjoy playing a wide range of games, from action-packed shooters to immersive RPGs. Gaming not only provides entertainment but also challenges my strategic thinking and problem-solving skills.</p>
+    <p>Currently, I'm exploring...</p>
+  </article>
+  <article>
+    <h1>Swimming</h1>
+    <p>Swimming is my go-to activity for staying active and maintaining a healthy lifestyle. Whether it's swimming laps in a pool or enjoying the waves at the beach, I find swimming both refreshing and energizing.</p>
+    <p>My favorite swimming spots include...</p>
+  </article>
+</section>
+
+<section>
+  <form id="registrationForm">
+    <h2>Registration Form</h2>
+    <div id="formErrors" class="error"></div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="phone">Phone Number:</label>
+    <input type="text" id="phone" name="phone" required placeholder="1234567890">
+
+    <label for="country">Country:</label>
+    <select id="country" name="country" required>
+      <option value="91">India (+91)</option>
+      <option value="1">United States (+1)</option>
+      <option value="44">United Kingdom (+44)</option>
+    </select>
+
+    <label for="Email">Email:</label>
+    <input type="email" id="email" name="email" required placeholder="***********">
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required placeholder="********">
+
+    <label for="confirmPassword">Confirm Password:</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="********">
+
+    <button type="submit">Register</button>
+  </form>
+</section>
+
+<footer>
+  <p>© 2024 Your Name. All rights reserved.</p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const phoneInput = document.getElementById('phone');
+  const countrySelect = document.getElementById('country');
+  const form = document.getElementById('registrationForm');
+  const errorsDiv = document.getElementById('formErrors');
+
+  countrySelect.addEventListener('change', function() {
+    const countryCode = countrySelect.value;
+    phoneInput.value = `${countryCode}`;
+  });
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    errorsDiv.textContent = '';
+
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    const errors = [];
+
+    if (name.length === 0) {
+      errors.push('Name is required.');
+    }
+
+    if (!/^\d{10,15}$/.test(phone)) {
+      errors.push('Phone number must be 10 to 15 digits long.');
+    }
+
+    if (password.length < 8) {
+      errors.push('Password must be at least 8 characters long.');
+    }
+
+    if (!/[A-Z]/.test(password)) {
+      errors.push('Password must contain at least one uppercase letter.');
+    }
+
+    if (!/[a-z]/.test(password)) {
+      errors.push('Password must contain at least one lowercase letter.');
+    }
+
+    if (!/\d/.test(password)) {
+      errors.push('Password must contain at least one number.');
+    }
+
+    if (!/[!@#$%^&*()_+{}\[\]:;"\'<>,.?/~`]/.test(password)) {
+      errors.push('Password must contain at least one special character.');
+    }
+
+    if (password !== confirmPassword) {
+      errors.push('Passwords do not match.');
+    }
+
+    if (errors.length > 0) {
+      errorsDiv.innerHTML = errors.join('<br>');
+    } else {
+      alert('Registration successful!');
+      form.reset();
+    }
+  });
+});
+</script>
+
+</body>
+</html>
+
